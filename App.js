@@ -1,59 +1,34 @@
-
-import React from "react";
 import ReactDOM from 'react-dom/client';
-
-
-/*
-  const heading = React.createElement("h1", { id: "heading" }, "hello world from react");
-  const root = ReactDOM.createRoot(document.getElementById("root"));
-  root.render(heading);
-  */
-
-  /*const parent = React.createElement("div", { id: "parent" },[
-                React.createElement("div",{id:"child"},[
-             React.createElement("h1",{key: 1},"I'm an h1 tag"),
-             React.createElement("h1",{key:2},"I'm an h2 tag"),
-            ]),
-                
-                React.createElement("div",{id:"child2"},[
-             React.createElement("h1",{key:3},"I'm an h1 tag"),
-             React.createElement("h1",{key:4},"I'm an h2 tag"),
-  ]),
-]);
-  console.log(parent);
-   const root = ReactDOM.createRoot(document.getElementById("root"));
-  root.render(parent);*/
-  /* const Title=() => (
-    <h1 className="head" tabIndex="5">
-      Namesthe React
-      </h1>
-   );
-   const HeadingComponent = () => (
-    <div id="container">
-      {Title()}
-      <Title></Title>
-      <Title/>
-      <h1 className="heading">Namesthe React funcdamental component</h1>
-    </div>
-   );
-
-   const root= ReactDOM.createRoot(document.getElementById("root"));
-   root.render(<HeadingComponent/>);*/
-
-   
- 
-
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Header from "./src/components/Header";
 import Body from "./src/components/Body";
+import About from "./src/components/About";
+import Contact from './src/components/Contact';
+import NotFound from "./src/components/NotFound";
+import ErrorPage from "./src/components/ErrorPage";
 
-   const AppLayout = () => {
-      return (
-       <div className="app">
-          <Header/>
-          <Body/>
-      </div>
-    );
-  };
+const AppLayout = () => {
+  return (
+    <div className="app">
+      <Header/>
+      <Outlet/>
+    </div>
+  );
+};
 
-  const root= ReactDOM.createRoot(document.getElementById("root"));
-   root.render(<AppLayout/>);
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <AppLayout/>,
+    errorElement: <ErrorPage/>,
+    children: [
+      { index: true, element: <Body/> },
+      { path: 'about', element: <About/> },
+      { path: 'contact',element: <Contact/>},
+      { path: '*', element: <NotFound/> }
+    ]
+  }
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<RouterProvider router={router}/>);
