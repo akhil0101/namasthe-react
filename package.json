@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "learning react by abhilasha",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "parcel index.html",
+    "build": "parcel build index.html",
+    "clean": "rm -rf dist .parcel-cache"
   },
   "repository": {
     "type": "git",

@@ -6,6 +6,7 @@ import About from "./src/components/About";
 import Contact from './src/components/Contact';
 import NotFound from "./src/components/NotFound";
 import ErrorPage from "./src/components/ErrorPage";
+import RestaurantMenu from './src/components/RestaurantMenu';
 
 const AppLayout = () => {
   return (
@@ -25,7 +26,8 @@ const router = createBrowserRouter([
       { index: true, element: <Body/> },
       { path: 'about', element: <About/> },
       { path: 'contact',element: <Contact/>},
-      { path: '*', element: <NotFound/> }
+      { path: '*', element: <NotFound/> },
+      {path:'restaurant/:resId',element: <RestaurantMenu/>},
     ]
   }
 ]);
