@@ -2,11 +2,14 @@
   "name": "namasthe-react",
   "version": "1.0.0",
   "description": "learning react by abhilasha",
+  "type": "module",
   "scripts": {
     "test": "jest",
     "dev": "parcel index.html",
     "build": "parcel build index.html",
-    "clean": "rm -rf dist .parcel-cache"
+    "clean": "rm -rf dist .parcel-cache",
+    "lint": "eslint src --ext .js,.jsx",
+    "lint:fix": "eslint src --ext .js,.jsx --fix"
   },
   "repository": {
     "type": "git",
@@ -22,6 +25,10 @@
   },
   "homepage": "https://github.com/abhiandnow30/namasthe-react#readme",
   "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "eslint": "^9.38.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
     "parcel": "^2.8.3"
   },
   "dependencies": {

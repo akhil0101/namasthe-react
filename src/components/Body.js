@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import ResturantCard from'./ResturantCard';
 import {Link } from 'react-router-dom';
 import Shimmer from './Shimmer';
+import useOnlineStatus from '../utils/useOnlineStatus';
 
 const Body = () => {
-   console.log("Rendered")
 
   const [listOfRestaurants, setListOfResturants]=useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
@@ -38,6 +38,9 @@ const Body = () => {
       setFilteredRestaurant(filteredRes)
 
   }
+
+  if(!useOnlineStatus())
+    return (<h1>User Please check the internet</h1>)
   
   //conditional rendering
   return listOfRestaurants==0 ?<Shimmer/>:(

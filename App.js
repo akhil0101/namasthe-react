@@ -2,11 +2,22 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Header from "./src/components/Header";
 import Body from "./src/components/Body";
-import About from "./src/components/About";
+import { lazy, Suspense } from 'react';
+// import About from "./src/components/About";
 import Contact from './src/components/Contact';
 import NotFound from "./src/components/NotFound";
 import ErrorPage from "./src/components/ErrorPage";
 import RestaurantMenu from './src/components/RestaurantMenu';
+
+
+/*
+chunking
+code splitting
+dynamic bundling
+
+making the app file in smaller chunks 
+*/
+const About = lazy(()=> import('./src/components/About'))
 
 const AppLayout = () => {
   return (
@@ -24,7 +35,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage/>,
     children: [
       { index: true, element: <Body/> },
-      { path: 'about', element: <About/> },
+      { path: 'about', element: <Suspense fallback={<h1> Loading........</h1>}><About/></Suspense> },
       { path: 'contact',element: <Contact/>},
       { path: '*', element: <NotFound/> },
       {path:'restaurant/:resId',element: <RestaurantMenu/>},
