@@ -45,25 +45,29 @@ const Body = () => {
   //conditional rendering
   return listOfRestaurants==0 ?<Shimmer/>:(
     <div className="body">
-      <div className="filter">
-        <div className='search'>
+      <div className="filter flex">
+        <div className='search m-4 p-4'>
              <input type="text" 
-                    className='search-box' 
+                    className='border border-solid border-black' 
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value) }></input>
-             <button onClick={() => filterResturants()}>search</button>
+             <button className="px-4 py-2 bg-green-200 m-4 rounded-lg" onClick={() => filterResturants()}>search</button>
 
         </div>
-        <button
-        className='filter-btn'
-        onClick={()=>{
-         setListOfResturants(listOfRestaurants.filter(
-            (res) => res.data.avgRating >= 4
-          ))
-        }}>
-          Top Rated Restuarants
-        </button>
-      <div className="res-container">
+        <div className='search m-4 p-4 flex items-center'>
+             <button
+              className='px-4 py-2 bg-gray-300 rounded-lg'
+              onClick={()=>{
+              setListOfResturants(listOfRestaurants.filter(
+                  (res) => res.data.avgRating >= 4
+                ))
+              }}>
+                Top Rated Restuarants
+              </button>
+        </div>
+      </div>
+        
+      <div className="flex flex-wrap">
         {filteredRestaurant.map((res)=>{
           return (
           <Link  key={res.info.id} to= {"restaurant/" + res.info.id}>
@@ -74,7 +78,6 @@ const Body = () => {
       
      
       </div>
-    </div>
     </div>
   );
 };
