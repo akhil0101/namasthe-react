@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
-import { MENU_DETAILS } from "../utils/menuApiResponse"
+import { useState, useEffect } from "react";
+import { FOODFIRE_MENU_API_URL } from "../service/constants.js"
 
-const useRestaurantMenu = (resId) => {
+const useRestaurantMenu = ({resId}) => {
     console.log("resid",resId)
     const [res,setRes] = useState(null)
     useEffect(()=>{
@@ -10,14 +10,14 @@ const useRestaurantMenu = (resId) => {
     
     const fetchRestaurantMenu = async()=>{
         try{
-        const data = await fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.4220991&lng=75.7329695&restaurantId=672933&catalog_qa=undefined"+resId)
+        const data = await fetch(FOODFIRE_MENU_API_URL + resId)
         console.log("data",data)
         const json = await data.json()
         console.log("json",json)
         setRes(json.data)
         }
         catch(err){
-            setRes(MENU_DETAILS)
+            
         }
     }
 

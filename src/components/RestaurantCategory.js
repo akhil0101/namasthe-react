@@ -1,4 +1,4 @@
-import ItemList from "./itemList"
+import CategoryListItems from "./CategoryListItems"
 const RestuarantCategory = ({data}) => {
      return (
         <div>
@@ -9,7 +9,7 @@ const RestuarantCategory = ({data}) => {
                     <div>⬇️</div>
                 </div>
                 {/* accordion*/}
-                <ItemList items={data.itemCards}/>
+                <CategoryListItems items={data.itemCards}/>
             </div>
         </div>
      )

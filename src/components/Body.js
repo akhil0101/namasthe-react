@@ -3,6 +3,7 @@ import ResturantCard, { withPromotedLabel } from'./ResturantCard';
 import {Link } from 'react-router-dom';
 import Shimmer from './Shimmer';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import { FOODFIRE_API_URL } from '../service/constants'
 
 const Body = () => {
 
@@ -25,7 +26,7 @@ const Body = () => {
   // },[count])
 
   const fetchData=async()=>{
-    const data =  await fetch("https://swiggy-api-4c740.web.app/swiggy-api.json");
+    const data =  await fetch(FOODFIRE_API_URL);
     const json = await data.json();
     
     
@@ -73,7 +74,7 @@ const Body = () => {
         {filteredRestaurant.map((res)=>{
           return (
           <Link  key={res.info.id} to= {"restaurant/" + res.info.id}>
-            {res.info.isOpen ? <RestaurantCardPromoted resVal={res}/> : <ResturantCard  resVal={res}/>}
+            {res.info.isOpen ? <RestaurantCardPromoted {...res?.info}/> : <ResturantCard {...res?.info}/>}
             
           </Link>
           )
