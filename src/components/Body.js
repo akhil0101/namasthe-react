@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import UseContext from '../utils/userContext';
 import ResturantCard, { withPromotedLabel } from'./ResturantCard';
 import {Link } from 'react-router-dom';
 import Shimmer from './Shimmer';
@@ -41,7 +42,7 @@ const Body = () => {
       setFilteredRestaurant(filteredRes)
 
   }
-
+  const {setUsername,loggedInUser} = useContext(UseContext)
   if(!useOnlineStatus())
     return (<h1>User Please check the internet</h1>)
   
@@ -67,6 +68,14 @@ const Body = () => {
               }}>
                 Top Rated Restuarants
               </button>
+        </div>
+        <div className='search m-4 p-4 flex items-center'>
+          <label>UserName :</label>
+          <input 
+            className='border border-solid p-2 m-2'
+            value={loggedInUser}
+            onChange={(e)=>setUsername(e.target.value)}
+          />
         </div>
       </div>
         

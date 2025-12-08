@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState , useContext} from "react";
 import { Link } from "react-router-dom";
 import {reslog_URL} from "../service/constants";
 import {log_URL} from "../service/constants";
+import UseContext from "../utils/userContext";
 
 const Header = () => {
   console.log("Header is rendering")
   const [btnNameReact,setbtnNameReact]= useState("Login")
+
+
+  const {loggedInUser } = useContext(UseContext)
   useEffect(()=>{
     console.log("useEffect function is invoked")
   },[btnNameReact])
@@ -25,9 +29,11 @@ return(
             onClick={() => {btnNameReact === "Login" ? setbtnNameReact("Logout"): setbtnNameReact("Login");
             //  console.log(btnNameReact);
           }}>{btnNameReact}</button>
+        <li className="px-4">{loggedInUser}</li>
       </ul>
     </div>
   </div>
 )
 }
 export default Header;
+

@@ -9,6 +9,7 @@ import Shimmer from "./Shimmer"
 const RestaurantMenu = () => {
     const resId = useParams()
     const [restaurant, setRestaurant] = useState(null); // call useState to store the api data in res
+    const [ currActive, setCurrActive] = useState(null);
     const data = useRestaurantMenu(resId)
 
     // Set restaurant data when data changes
@@ -33,7 +34,14 @@ const RestaurantMenu = () => {
             <p className="font-bold text-lg">{restaurant?.cuisines.join(", ")} - {restaurant?.costForTwo}</p>
             {/*categories accordions */}
             {
-              (categories||[]).map((category,i) => ( <RestuarantCategory key={i} data={category?.card?.card}/>))
+              (categories||[]).map((category,i) => (
+                <RestuarantCategory
+                    key={i}
+                    data={category?.card?.card}
+                    showitem= {currActive === i}
+                    setCurrActive = {()=>setCurrActive(currActive === i ? null : i)}
+                />
+            ))
             }
         </div>
     )

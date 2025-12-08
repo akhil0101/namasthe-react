@@ -2,7 +2,8 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Header from "./src/components/Header";
 import Body from "./src/components/Body";
-import { lazy, Suspense } from 'react';
+import UseContext from './src/utils/userContext';
+import { lazy, Suspense , useState, useEffect} from 'react';
 // import About from "./src/components/About";
 import Contact from './src/components/Contact';
 import NotFound from "./src/components/NotFound";
@@ -20,11 +21,19 @@ making the app file in smaller chunks
 const About = lazy(()=> import('./src/components/About'))
 
 const AppLayout = () => {
+  const [username, setUsername] = useState("")
+
+  useEffect(()=>{
+    setUsername("akhil__")
+  },[])
   return (
-    <div className="app">
-      <Header/>
-      <Outlet/>
-    </div>
+    <UseContext.Provider value={ {loggedInUser: '' }}>
+      <div className="app">
+        <Header/>
+        <Outlet/>
+      </div>
+    </UseContext.Provider>
+    
   );
 };
 
